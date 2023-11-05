@@ -8,8 +8,15 @@ import (
 )
 
 func MakeComposeFile(cmd *cobra.Command) string {
-	k0sConfigPath := utils.SaveToFile(MakeK0sConfig(), "k0sconfig.yaml")
-	containerdConfigPath := utils.SaveToFile(MakeK0sConfig(), "containerd.toml")
+	k0sConfigPath, err := utils.SaveToFile(MakeK0sConfig(), "k0sconfig.yaml")
+	if err != nil {
+		panic(err)
+	}
+
+	containerdConfigPath, err := utils.SaveToFile(utils.MakeRegistryConfig("noxy.ddns.net:5000"), "containerd.toml")
+	if err != nil {
+		panic(err)
+	}
 
 	config := fmt.Sprintf(`services:
   k0s:

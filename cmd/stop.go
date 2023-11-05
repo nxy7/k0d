@@ -1,7 +1,8 @@
 package cmd
 
 import (
-	"fmt"
+	"k0d/compose"
+	"k0d/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -11,7 +12,10 @@ var stopCmd = &cobra.Command{
 	Short: "Stop k0d cluster",
 	Long:  `Stop command`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Running stop command")
+		err := utils.RunCommandWithSpinner(utils.MakeExternalCommand("docker", "compose", "-p", compose.PROJECT_NAME, "down"), "Shutting k0d down..", "Done!\n")
+		if err != nil {
+			panic(err)
+		}
 	},
 }
 

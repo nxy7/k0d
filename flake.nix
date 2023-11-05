@@ -15,6 +15,11 @@
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [ go cilium-cli kubernetes-helm ];
           };
+          packages.default = pkgs.buildGoModule {
+            name = "k0d";
+            src = ./.;
+            vendorHash = "sha256-PEc26LrstQ36W23379N7vMDP+fAefKFXj8ia1tKp1Hw=";
+          };
         };
     };
 }

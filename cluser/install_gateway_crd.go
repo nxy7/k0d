@@ -1,5 +1,0 @@
-package cluser
-
-func InstallGatewayCrds() {
-
-}

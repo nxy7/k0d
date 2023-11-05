@@ -1,7 +1,9 @@
 package cmd
 
 import (
-	"fmt"
+	"k0d/cluster"
+	"k0d/compose"
+	"k0d/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -11,7 +13,24 @@ var startCmd = &cobra.Command{
 	Short: "Start k0d cluster",
 	Long:  `Start command`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Running start command")
+		composeConfig := compose.MakeComposeFile(cmd)
+		err := compose.Start(composeConfig)
+		if err != nil {
+			panic(err)
+		}
+
+		utils.WaitForCluster()
+		compose.MountCgroups()
+		cluster.InstallGatewayCrds()
+
+		cluster.InstallCillium()
+
+		cluster.InstallOpenEBS()
+		cluster.InstallCertManager()
+
+		cluster.ApplyGateway(cluster.GatewayConfig())
+		cluster.AnnotateGateway("172.17.0.2", "172.17.0.2/24")
+
 	},
 }
 
