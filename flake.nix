@@ -18,7 +18,7 @@
           packages.default = pkgs.buildGoModule {
             name = "k0d";
             src = ./.;
-            vendorHash = "sha256-PEc26LrstQ36W23379N7vMDP+fAefKFXj8ia1tKp1Hw=";
+            vendorHash = "sha256-BppWw7cqpvme4iZFe6lSV908620cvYXW8SYa2TAhMPs=";
           };
         };
     };
