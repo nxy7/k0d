@@ -8,7 +8,9 @@ import (
 )
 
 func ApplyGateway(gtw string) error {
-	return utils.MakeExternalCommandWithStdin(strings.NewReader(GatewayConfig()), "kubectl", "apply", "-f", "/dev/stdin").Run()
+	cmd := exec.Command("kubectl", "apply", "-f", "/dev/stdin")
+	cmd.Stdin = strings.NewReader(GatewayConfig())
+	return cmd.Run()
 }
 
 func AnnotateGateway(ip, ipPool string) error {
