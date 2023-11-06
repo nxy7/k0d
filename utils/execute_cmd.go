@@ -26,8 +26,8 @@ func MakeExternalCommandWithStdin(in io.Reader, name string, args ...string) *ex
 
 func RunCommandWithSpinner(c *exec.Cmd, spinnerText, finalText string) error {
 	// Commands with spinner should have no output right?
-	c.Stdout = nil
-	c.Stderr = nil
+	// c.Stdout = nil
+	// c.Stderr = nil
 	s := MakeSpinner(spinnerText, finalText)
 	s.Start()
 	defer s.Stop()

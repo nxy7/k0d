@@ -2,6 +2,7 @@ package cluster
 
 import (
 	"k0d/utils"
+	"os/exec"
 )
 
 func InstallCillium() {
@@ -9,7 +10,8 @@ func InstallCillium() {
 	if err != nil {
 		panic(err)
 	}
-	cmd := utils.MakeExternalCommand("cilium", "install", "--values", p, "--version", "1.14.3", "--wait")
+	cmd := exec.Command("cilium", "install", "--values", p, "--version", "1.14.3", "--wait")
+
 	err = utils.RunCommandWithSpinner(cmd, "Installing Cillium", "Cilium Installed\n")
 	if err != nil {
 		panic(err)
