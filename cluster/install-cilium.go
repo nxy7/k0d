@@ -1,6 +1,8 @@
 package cluster
 
 import (
+	"bytes"
+	"fmt"
 	"k0d/utils"
 	"os/exec"
 )
@@ -11,9 +13,12 @@ func InstallCillium() {
 		panic(err)
 	}
 	cmd := exec.Command("cilium", "install", "--values", p, "--version", "1.14.3", "--wait")
+	var serr bytes.Buffer
+	cmd.Stderr = &serr
 
 	err = utils.RunCommandWithSpinner(cmd, "Installing Cillium", "Cilium Installed\n")
 	if err != nil {
+		fmt.Println(serr.String())
 		panic(err)
 	}
 }

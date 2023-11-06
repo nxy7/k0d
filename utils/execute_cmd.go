@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"bytes"
+	"fmt"
 	"io"
 	"os"
 	"os/exec"
@@ -26,12 +28,16 @@ func MakeExternalCommandWithStdin(in io.Reader, name string, args ...string) *ex
 
 func RunCommandWithSpinner(c *exec.Cmd, spinnerText, finalText string) error {
 	// Commands with spinner should have no output right?
-	// c.Stdout = nil
-	// c.Stderr = nil
+	var sout, serr bytes.Buffer
+	c.Stdout = &sout
+	c.Stderr = &serr
 	s := MakeSpinner(spinnerText, finalText)
 	s.Start()
 	defer s.Stop()
 	err := c.Run()
+	if err != nil {
+		fmt.Println(serr.String())
+	}
 	return err
 }
 

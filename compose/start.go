@@ -2,9 +2,12 @@ package compose
 
 import (
 	"k0d/utils"
+	"os/exec"
 	"strings"
 )
 
 func Start(config string) error {
-	return utils.RunCommandWithSpinner(utils.MakeExternalCommandWithStdin(strings.NewReader(config), "docker", "compose", "-f", "/dev/stdin", "-p", PROJECT_NAME, "up", "-d"), "Creating docker containers...", "Docker containers created\n")
+	cmd := exec.Command("docker", "compose", "-f", "/dev/stdin", "-p", PROJECT_NAME, "up", "-d")
+	cmd.Stdin = strings.NewReader(config)
+	return utils.RunCommandWithSpinner(cmd, "Creating docker containers...", "Docker containers created\n")
 }
