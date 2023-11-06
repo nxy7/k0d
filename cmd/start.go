@@ -13,6 +13,8 @@ var startCmd = &cobra.Command{
 	Short: "Start k0d cluster",
 	Long:  `Start command`,
 	Run: func(cmd *cobra.Command, args []string) {
+		utils.CheckRequiredExecutables(cmd)
+
 		composeConfig := compose.MakeComposeFile(cmd)
 		err := compose.Start(composeConfig)
 		if err != nil {
