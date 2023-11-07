@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"k0d/cluster"
 	"k0d/compose"
 	"k0d/utils"
@@ -13,6 +14,10 @@ var startCmd = &cobra.Command{
 	Short: "Start k0d cluster",
 	Long:  `Start command`,
 	Run: func(cmd *cobra.Command, args []string) {
+		if compose.IsK0dActive() {
+			fmt.Println("There's k0d instance active already")
+			return
+		}
 		utils.CheckRequiredExecutables(cmd)
 
 		composeConfig := compose.MakeComposeFile(cmd)
