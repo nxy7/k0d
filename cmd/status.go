@@ -12,9 +12,9 @@ var statusCmd = &cobra.Command{
 	Short: "Check status of k0d cluster",
 	Run: func(cmd *cobra.Command, args []string) {
 		if compose.IsK0dActive() {
-			fmt.Println("There's k0d instance active already")
+			fmt.Println("✔ There's k0d instance active already")
 		} else {
-			fmt.Println("K0d is not running yet")
+			fmt.Println("✘ K0d is not running yet")
 		}
 	},
 }
