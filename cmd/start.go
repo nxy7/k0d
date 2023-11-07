@@ -49,4 +49,6 @@ func init() {
 	startCmd.Flags().BoolP("gateway-api", "g", true, "")
 	startCmd.Flags().BoolP("openebs", "o", true, "")
 	startCmd.Flags().Bool("certmanager", true, "")
+
+	rootCmd.AddCommand(startCmd)
 }

@@ -2,8 +2,6 @@ package cmd
 
 // Maybe this should be --force flag on start
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -12,16 +10,12 @@ var restartCmd = &cobra.Command{
 	Short: "Restart k0d cluster",
 	Long:  `Restart command`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Running start command")
+		stopCmd.Run(cmd, args)
+		startCmd.Run(cmd, args)
 	},
 }
 
 func init() {
-	restartCmd.Flags().Int16P("worker-nodes", "w", 1, "")
-	restartCmd.Flags().Int16P("master-nodes", "m", 1, "")
 
-	restartCmd.Flags().BoolP("cilium", "c", true, "")
-	restartCmd.Flags().BoolP("gateway-api", "g", true, "")
-	restartCmd.Flags().BoolP("openebs", "o", true, "")
-	restartCmd.Flags().Bool("certmanager", true, "")
+	rootCmd.AddCommand(restartCmd)
 }

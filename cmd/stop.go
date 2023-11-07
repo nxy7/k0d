@@ -21,4 +21,6 @@ var stopCmd = &cobra.Command{
 
 func init() {
 	stopCmd.Flags().Bool("cilium", true, "")
+
+	rootCmd.AddCommand(stopCmd)
 }
