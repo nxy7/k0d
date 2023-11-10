@@ -41,19 +41,19 @@ bgpControlPlane:
 devices: "eth0"
 externalIPs:
   enabled: true
-nodePort:
-  enabled: true
+# nodePort:
+#  enabled: true
 gatewayAPI:
   enabled: true
 ipam:
   mode: kubernetes
-bpf:
-  masquerade: true
-  hostLegacyRouting: false
+# bpf:
+#  masquerade: true
+#  hostLegacyRouting: false
 ipv4:
   enabled: true
-ipv6:
-  enabled: false
+# ipv6:
+#  enabled: false
 hubble:
   enabled: true
   ui:
