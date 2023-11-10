@@ -13,6 +13,8 @@ var statusCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		if compose.IsK0dActive() {
 			fmt.Println("✔ There's k0d instance active already")
+
+			// list active cluster utilities like openEBS, GatewayAPI, Cilium
 		} else if compose.IsK0dStopped() {
 			fmt.Println("There's stopped k0d instance")
 		} else {
