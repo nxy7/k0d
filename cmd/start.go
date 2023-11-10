@@ -18,6 +18,11 @@ var startCmd = &cobra.Command{
 			fmt.Println("There's k0d instance active already")
 			return
 		}
+		if compose.IsK0dStopped() {
+			fmt.Println("Restarting stopped k0d instance")
+			compose.Start(compose.MakeComposeFile(cmd))
+			return
+		}
 		utils.CheckRequiredExecutables(cmd)
 
 		composeConfig := compose.MakeComposeFile(cmd)
