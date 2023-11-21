@@ -12,7 +12,7 @@ var stopCmd = &cobra.Command{
 	Short: "Stop k0d cluster",
 	Long:  `Stop command`,
 	Run: func(cmd *cobra.Command, args []string) {
-		err := utils.RunCommandWithSpinner(utils.MakeExternalCommand("docker", "compose", "-p", compose.PROJECT_NAME, "down"), "Shutting k0d down..", "Done!\n")
+		err := utils.RunCommandWithSpinner(utils.MakeExternalCommand("docker", "compose", "-p", compose.PROJECT_NAME, "stop"), "Shutting k0d down..", "Done!\n")
 		if err != nil {
 			panic(err)
 		}
