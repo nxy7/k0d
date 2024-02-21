@@ -7,15 +7,16 @@ import (
 )
 
 func InstallGatewayCrds() {
-	s := utils.MakeSpinner("Installing Gateway API Crds", "Gateway CRDs installed\n")
+	s := utils.MakeSpinner("Installing Gateway API Crds v1.0.0", "Gateway CRDs v1.0.0 installed\n")
 	s.Start()
 	defer s.Stop()
 	manifests := []string{
-		"https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v0.8.1/config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml",
-		"https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v0.8.1/config/crd/standard/gateway.networking.k8s.io_gateways.yaml",
-		"https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v0.8.1/config/crd/standard/gateway.networking.k8s.io_httproutes.yaml",
-		"https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v0.8.1/config/crd/standard/gateway.networking.k8s.io_referencegrants.yaml",
-		"https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v0.8.1/config/crd/experimental/gateway.networking.k8s.io_tlsroutes.yaml",
+		"kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/standard/gateway.networking.k8s.io_gatewayclasses.yaml",
+		"kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/standard/gateway.networking.k8s.io_gateways.yaml",
+		"kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/standard/gateway.networking.k8s.io_httproutes.yaml",
+		"kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/standard/gateway.networking.k8s.io_referencegrants.yaml",
+		"kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/experimental/gateway.networking.k8s.io_grpcroutes.yaml",
+		"kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.0.0/config/crd/experimental/gateway.networking.k8s.io_tlsroutes.yaml",
 	}
 	wg := sync.WaitGroup{}
 	for _, manifest := range manifests {
