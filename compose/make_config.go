@@ -21,7 +21,7 @@ func MakeComposeFile(cmd *cobra.Command) string {
 	config := fmt.Sprintf(`services:
   k0s:
     container_name: k0s
-    image: docker.io/k0sproject/k0s:v1.27.4-k0s.0
+    image: docker.io/k0sproject/k0s:v1.29.1-k0s.1
     command: k0s controller --config=/etc/k0s/config.yaml --single
     hostname: k0s
     privileged: true
