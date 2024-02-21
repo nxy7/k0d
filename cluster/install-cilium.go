@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"k0d/utils"
 	"os/exec"
+	"time"
 )
 
 func InstallCillium() {
@@ -16,11 +17,24 @@ func InstallCillium() {
 	var serr bytes.Buffer
 	cmd.Stderr = &serr
 
-	err = utils.RunCommandWithSpinner(cmd, "Installing Cillium", "Cilium Installed\n")
+	err = utils.RunCommandWithSpinner(cmd, "Installing Cillium Manifests", "Cilium Manifests Installed\n")
 	if err != nil {
 		fmt.Println(serr.String())
 		panic(err)
 	}
+
+	s := utils.MakeSpinner("Waiting for Cilium Deployment", "Cilium Deployed\n")
+	s.Start()
+	defer s.Stop()
+	time.Sleep(time.Second * 10)
+
+	cmd = exec.Command("kubectl", "rollout", "status", "ds", "cilium", "-n", "kube-system")
+	for err = cmd.Run(); err != nil; {
+		time.Sleep(time.Second)
+	}
+
+	// kubectl rollout status ds cilium -n kube-system
+
 }
 
 func CiliumValues() string {
