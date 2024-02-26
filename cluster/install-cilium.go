@@ -47,7 +47,8 @@ envoy:
   enabled: true
 debug:
   enable: true
-  verbose: envoy
+  verbose: flow
+  # verbose: flow envoy
 l2announcements:
   enabled: true
 bgpControlPlane:
