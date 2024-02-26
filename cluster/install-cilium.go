@@ -46,7 +46,7 @@ operator:
 envoy:
   enabled: true
 debug:
-  enable: true
+  enabled: true
   verbose: flow
   # verbose: flow envoy
 l2announcements:
