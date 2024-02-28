@@ -13,7 +13,7 @@ func InstallCillium() {
 	if err != nil {
 		panic(err)
 	}
-	cmd := exec.Command("cilium", "install", "--values", p, "--version", "1.15.1", "--wait")
+	cmd := exec.Command("cilium", "install", "--values", p, "--version", "1.15.1")
 	var serr bytes.Buffer
 	cmd.Stderr = &serr
 
